@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+
+	<!-- 与spring集成的写法，action等交予spring管理 -->
+	<!-- 
+	<package name="struts2" extends="struts-default">
+	 -->
+	 <!-- jiadd modify 继承（extends） 拦截器 -->
+	<package name="struts2" extends="abstract_struts">
+		<!-- 生成验证码图片 -->
+		<action name="imagecode" class="imageCodeAction">
+			<!-- 
+			<result name="success" type="stream">
+				<param name="inputName">is</param>
+				<param name="contentType">image/jpeg</param>
+			</result>
+			 -->
+		</action>
+		
+		<action name="wechat" class="wechatAction"></action>
+		<!-- 登陆 -->
+		<action name="userLogin" class="loginAction">
+			<result name="success" type="redirect">home.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+		
+		<action name="menu_*" class="menuAction">
+			<interceptor-ref name="myInterceptor" />
+			<result>{1}.jsp</result>
+		</action>
+		
+		<action name="action_*_*_*_*" class="{1}" method="{2}">
+			<result name="success">{3}.jsp</result>
+			<result name="error">{4}.jsp</result>
+		</action>
+		
+		<action name="easyui_*_*_*_*" class="{1}" method="{2}">
+			<result name="success">{3}/{4}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="default" extends="json-default,abstract_struts">
+		 <default-action-ref name="default-error" />
+		 <global-results>
+		 	<result name="error" type="json">
+		 		<param name="root">error</param>
+		 	</result>
+		 </global-results>
+	
+		 <global-exception-mappings>  
+            <exception-mapping result="error" exception="java.lang.Exception" />  
+        </global-exception-mappings>  
+        
+		<action name="json_*_*" class="{1}" method="{2}">
+			<!-- 默认成功 -->
+			<result type="json">
+				<!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<!-- 开发接口 -->
+		<action name="api_*" class="api" method="{1}">
+			<!-- 默认成功 -->
+			<result type="json">
+				<!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+				<param name="root">jsonData</param>
+			</result>
+
+
+
+		</action>
+	</package>
+
+
+</struts>

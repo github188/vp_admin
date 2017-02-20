@@ -1,0 +1,12 @@
+{"total":28,"rows":[
+	{"devId":"FI-SW-01","devName":"摄像机1","password":10.00,"status":"P","nvr":"大华NVR1","td":"17","zzgroup":"未分组"},
+	{"devId":"K9-DL-01","devName":"摄像机2","password":12.00,"status":"P","nvr":"大华NVR1","td":"7","zzgroup":"未分组"},
+	{"devId":"RP-SN-01","devName":"摄像机3","password":12.00,"status":"P","nvr":"大华NVR1","td":"9","zzgroup":"车牌设备"},
+	{"devId":"RP-SN-01","devName":"摄像机4","password":12.00,"status":"P","nvr":"大华NVR1","td":"10","zzgroup":"机房"},
+	{"devId":"RP-LI-02","devName":"摄像机5","password":12.00,"status":"P","nvr":"大华NVR1","td":"14","zzgroup":"机房"},
+	{"devId":"FL-DSH-01","devName":"摄像机6","password":12.00,"status":"P","nvr":"海康NVR1","td":"12","zzgroup":"EST-14"},
+	{"devId":"FL-DSH-01","devName":"摄像机7","password":12.00,"status":"P","nvr":"大华NVR1","td":"1","zzgroup":"大门口"},
+	{"devId":"FL-DLH-02","devName":"摄像机8","password":12.00,"status":"P","nvr":"大华NVR2","td":"4","zzgroup":"人脸识别"},
+	{"devId":"FL-DLH-02","devName":"摄像机9","password":12.00,"status":"P","nvr":"未分组","td":"5","zzgroup":"大门口"},
+	{"devId":"AV-CB-01","devName":"摄像机10","password":92.00,"status":"P","nvr":"大华NVR1","td":"2","zzgroup":"未分组"}
+]}

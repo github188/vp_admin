@@ -1,0 +1,11 @@
+[{
+	"id":3,"text":"产品研发部",
+	"children":[{
+		"id":1,"text":"焦冬冬"
+		},{
+		"id":6,"text":"尤颖"
+		},{
+		"id":7,"text":"贾莉莉"
+		}]
+	},{"id":3,"text":"产品研发部",
+	"children":[{"id":1,"text":"焦冬冬"},{"id":6,"text":"尤颖"},{"id":7,"text":"贾莉莉"}]},{"id":3,"text":"产品研发部","children":[{"id":1,"text":"焦冬冬"},{"id":6,"text":"尤颖"},{"id":7,"text":"贾莉莉"}]},{"id":2,"text":"总经理办公室","children":[{"id":5,"text":"盛小宝"},{"id":4,"text":"陶俊杰"},{"id":3,"text":"曹宁"}]},{"id":2,"text":"总经理办公室","children":[{"id":5,"text":"盛小宝"},{"id":4,"text":"陶俊杰"},{"id":3,"text":"曹宁"}]},{"id":2,"text":"总经理办公室","children":[{"id":5,"text":"盛小宝"},{"id":4,"text":"陶俊杰"},{"id":3,"text":"曹宁"}]},{"id":1,"text":"所产业顾问","children":[{"id":2,"text":"王巧林"}]},{"id":4,"text":"综合管理部","children":[]}]

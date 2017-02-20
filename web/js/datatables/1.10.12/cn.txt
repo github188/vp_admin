@@ -1,0 +1,24 @@
+{
+    "decimal":        "",
+    "emptyTable":     "No data available in table",
+    "info":           "第 _PAGE_ 页/共 _PAGES_页",
+    "infoEmpty":      "Showing 0 to 0 of 0 entries",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "每页显示 _MENU_ 条记录",
+    "loadingRecords": "Loading...",
+    "processing":     "Processing...",
+    "search":         "Search:",
+    "zeroRecords":    "No matching records found",
+    "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Next",
+        "previous":   "Previous"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+}

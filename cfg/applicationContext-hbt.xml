@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- 启用spring注解支持 -->
+	<context:annotation-config />
+	<!-- 数据库连接配置 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:datasource/sql_conn_jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!--配数据源 -->
+	
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+			destroy-method="close">
+		<property name="driverClassName" value="${mysql.driverClassName}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+		<!-- 连接池启动时的初始值 -->  
+        <property name="initialSize" value="5" />    
+        <!-- 连接池的最大值 -->  
+        <property name="maxActive" value="30" />    
+        <!-- 最大空闲值。当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->  
+        <property name="minIdle" value="10" />  
+        <property name="maxIdle" value="30" />    
+        <!-- 最小空闲值。当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->  
+        <property name="maxWait" value="60000" />  
+        <property name="defaultAutoCommit" value="true" />
+        
+        <property name="timeBetweenEvictionRunsMillis" value="20000" /> 
+        <property name="minEvictableIdleTimeMillis" value="28000" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect </prop>
+				<prop key="current_session_context_class">thread</prop>  
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>  
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="default_schema">ssh</prop>
+				<prop key="hibernate.autoReconnect">true</prop> 
+				
+			</props>
+		</property>
+		<!-- 如果使用配置文件 -->
+	<!-- <property name="mappingLocations"> <list> <value>classpath:com/jialin/entity/User.hbm.xml</value> 
+		</list> </property> -->
+		<property name="annotatedClasses">
+			<list>
+		 
+		 		<!-- yangzhiyu add -->
+				<value>cn.ittc.entity.Dept</value>
+				<value>cn.ittc.entity.User</value>
+				<value>cn.ittc.entity.Role</value>
+
+				<!-- YangZhiYu add -->
+				<value>cn.ittc.entity.Permission</value>
+				<value>cn.ittc.entity.RolePermission</value>
+				
+				<!-- NVR实体类 	 彭坤	 2016/8/3 -->
+				<value>cn.ittc.entity.Nvr</value>
+				<value>cn.ittc.entity.NvrIpc</value>
+				<!-- IPC实体类 	 彭坤	 2016/8/5 -->
+				<value>cn.ittc.entity.Ipc</value>
+				<value>cn.ittc.entity.Loc</value>
+				<!-- jiaodd Add 2016-08-23 -->
+				<value>cn.ittc.entity.LocMenu</value>
+				
+				<!-- jiaodd Add 2016-08-31 微信-->
+				<value>cn.ittc.weixin.entity.pojo.WechatAsk</value>
+			</list>
+		</property>
+	</bean>
+	
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 事务的传播特性 -->
+	<tx:advice id="txadvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			
+			 <!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到-->
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 那些类那些方法使用事务 -->
+	<aop:config>
+	  <!-- 只对业务逻辑层实施事务 -->
+		<aop:pointcut id="allManagerMethod"
+			expression="execution(* cn.ittc..service.*.*(..))" />
+		<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txadvice" />
+		
+		<!-- 日志 
+		 <aop:aspect id="logAspect" ref="aspectBean">
+            <aop:pointcut id="businessService"  
+            expression="execution(* cn.ittc.service.impl.*.*(..))" />   
+            <aop:before pointcut-ref="businessService" method="doBefore"/>  
+            <aop:after pointcut-ref="businessService" method="doAfter"/>  
+            <aop:around pointcut-ref="businessService" method="doAround"/>  
+            <aop:after-throwing pointcut-ref="businessService" method="doThrowing" throwing="ex"/>  
+        </aop:aspect>
+        -->
+	</aop:config>
+
+</beans>

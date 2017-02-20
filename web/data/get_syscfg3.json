@@ -1,0 +1,18 @@
+{"total":"28",
+	"rows":[
+		{
+			"roleId":"57212",
+			"roleName":"测试Tree",
+			"permissions":[
+			{
+				"permissionId":"1",
+				"permissionName":"实时预览"	
+			},{
+				"permissionId":"2",
+				"permissionName":"录像回看"
+			}],"users":[{
+				"userId":"1",
+				"realName":"王巧林"
+			}]
+		}]
+}

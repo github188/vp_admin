@@ -1,0 +1,5 @@
+[
+	{"id":"1","text":"关于技贸","url":"home/about.jsp"},
+	{"id":"2","text":"使用说明","url":"home/readme.txt"},
+	{"id":"3","text":"联系我们","url":"home/contact.jsp"}
+]

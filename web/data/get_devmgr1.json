@@ -1,0 +1,37 @@
+[{
+	"text":"基本设备",
+		"children":[
+			{"text":"添加",
+				"iconCls":"icon-add"
+			},{
+				"text":"删除",
+				"iconCls":"icon-remove"
+			},{
+				"text":"Save",
+				"iconCls":"icon-save"
+			},{
+				"text":"Search",
+				"iconCls":"icon-search"
+			}
+			
+		]
+},{
+	"text":"设备类型",
+	"url":"devmgr/typelist.jsp",
+	"children":[
+		{"text":"添加类型",
+			"iconCls":"icon-add",
+			"url":"devmgr/typeadd.jsp"
+		},{
+			"text":"删除类型",
+			"iconCls":"icon-remove"
+		},{
+			"text":"修改类型",
+			"iconCls":"icon-edit"
+		},{
+			"text":"Search",
+			"iconCls":"icon-search"
+		}
+		
+	]
+}]

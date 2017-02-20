@@ -1,0 +1,5 @@
+[
+	{"id":"1","text":"操作日志","url":"log/log1.jsp"},
+	{"id":"2","text":"系统日志","url":"log/log2.jsp"},
+	{"id":"3","text":"设备日志","url":"log/log3.jsp"}
+]
